@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 const EditContact = (props) => {
-  const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
   useEffect(() => {
-    setId(props.contact.id);
     setName(props.contact.name);
     setEmail(props.contact.email);
   }, [props.contact]);
@@ -27,7 +25,7 @@ const EditContact = (props) => {
       return;
     }
 
-    props.onEditContact({ id, name, email });
+    props.onEditContact({ ...props.contact, name, email });
   };
 
   return (
@@ -35,20 +33,22 @@ const EditContact = (props) => {
       <h2>Edit Contact</h2>
       <form className="ui form" onSubmit={handleSubmit}>
         <div className="field">
-          <label>Name</label>
+          <label htmlFor="name">Name</label>
           <input
             type="text"
             name="name"
+            id="name"
             placeholder="Name"
             value={name}
             onChange={handleNameChange}
           />
         </div>
         <div className="field">
-          <label>Email</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             name="email"
+            id="email"
             placeholder="Email"
             value={email}
             onChange={handleEmailChange}
